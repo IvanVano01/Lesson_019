@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5317838997459405854}
   - component: {fileID: 5656815850576464303}
   m_Layer: 0
-  m_Name: EnemyView
+  m_Name: CharacterView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -274,9 +274,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2379173617400739754}
-  - component: {fileID: 480854629945119740}
-  - component: {fileID: 1906927171641894039}
-  - component: {fileID: 9184503501494421175}
+  - component: {fileID: 2362858577489333466}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -292,8 +290,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5174357593427478179}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.92387956, z: 0, w: -0.38268346}
-  m_LocalPosition: {x: -13.619729, y: 0, z: 3.9818494}
+  m_LocalRotation: {x: 0, y: -0.706066, z: -0, w: 0.70814604}
+  m_LocalPosition: {x: 1.4790615, y: 0, z: 8.024914}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -301,28 +299,7 @@ Transform:
   - {fileID: 5317838997459405854}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &480854629945119740
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5174357593427478179}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 9.09
-  m_Center: {x: 0, y: 1.0387635, z: -0}
---- !u!114 &1906927171641894039
+--- !u!114 &2362858577489333466
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -334,25 +311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1916172c3e51eef44a3e4b0f51c57aff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultState: 0
-  _reactionToPlayer: 0
-  _currentState: 0
   _enemyView: {fileID: 5656815850576464303}
-  _targetPoints: []
-  _target: {fileID: 0}
---- !u!114 &9184503501494421175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5174357593427478179}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ea3aa6ceb5026a47b4faeca650ead9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Enemy: {fileID: 1906927171641894039}
 --- !u!1 &5695999942210122792
 GameObject:
   m_ObjectHideFlags: 0

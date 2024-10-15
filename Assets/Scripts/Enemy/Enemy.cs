@@ -1,89 +1,62 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour, IMovable
 {
-    [SerializeField] private EnemyView _enemyView;
+    [SerializeField] private CharacterView _enemyView;
 
-    private EnemyDefaultState _defaultState;
-    private EnemyReactionToPlayer _reactionToPlayer;
-    private EnemyState _currentState;
+    private CharacterState _defaultState;
+    private CharacterState _reactionState;
+    private CharacterState _currentState;
 
-    private List<Transform> _targetPoints;
-    private Transform _target;
+    private Transform _targetAggr;
 
     private float _maxDistanceToTarget = 5f;
     private float _speed = 4;
     private float _speedRotion = 900f;
 
-    private Mover _mover;
-
-    public void Initialize(List<Transform> targetsArray, Transform target,EnemyDefaultState enemyDefaultState,EnemyReactionToPlayer enemyReactionToPlayer)
+    public void Initialize(CharacterState defaultState, CharacterState reactionState, Transform targetAggr)
     {
-        _target = target;
+        _defaultState = defaultState;
+        _reactionState = reactionState;
+        _targetAggr = targetAggr;
 
-        _targetPoints = new List<Transform>();
-        foreach (Transform targetPoint in targetsArray)
-        {
-            _targetPoints.Add(targetPoint);
-        }
-
-        _defaultState = enemyDefaultState;
-        _reactionToPlayer = enemyReactionToPlayer;
+        SetCurrentState(_defaultState);
     }
 
-    public Transform Transform => transform;
     public float Speed => _speed;
     public float SpeedRotion => _speedRotion;
-
-    public List<Transform> TargetPoints => _targetPoints;
-    public Transform Target => _target;
-    public EnemyView EnemyView => _enemyView;    
+    public CharacterView View => _enemyView;
+    public Transform Transform => transform;
 
     private void Update()
     {
-        SwitchState(_target.position);
+        SwitchState(_targetAggr.position);
 
-        if (_mover == null)
-            return;
-
-        _mover.Update();
+        _currentState.Update();
     }
-
-    public void SetMover(Mover mover)
-    {
-        _mover?.StopMove();
-        _mover = mover;
-        _mover.StartMove();
-    }
-
-    public void SetState(EnemyState state)
-    {
-        if (_currentState != state)
-        {
-            _currentState = state;
-        }
-    }
-
-    public EnemyDefaultState DefaultState => _defaultState;
-    public EnemyReactionToPlayer ReactionToPlayer => _reactionToPlayer;
-    public EnemyState CurrentState => _currentState;
-
-    public void SetCurrentState(EnemyState enemyState) => _currentState = enemyState;
 
     private void SwitchState(Vector3 target)
     {
         Vector3 distance = target - this.transform.position;
 
-        if (Mathf.Abs(distance.magnitude) < _maxDistanceToTarget)
+        if (Mathf.Abs(distance.magnitude) > _maxDistanceToTarget)
         {
-            SetState(EnemyState.ReactionToPlayer);
+            SetCurrentState(_defaultState);
             Debug.DrawLine(this.transform.position, target, Color.green);
+
         }
         else
         {
-            SetState(EnemyState.DefaultState);
+            SetCurrentState(_reactionState);
             Debug.DrawLine(this.transform.position, target, Color.red);
         }
     }
+
+    private void SetCurrentState(CharacterState state)
+    {
+        _currentState?.ExitState();
+        _currentState = state;
+        _currentState.EnterState();
+    }
+
 }

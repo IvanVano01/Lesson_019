@@ -2,11 +2,12 @@ using UnityEngine;
 
 public class MoveToTarget : Mover
 {
-    private Vector3 _target;
+    private Transform _target;
+    private const float MinDistance = 0.05f;
 
     private IMovable _movable;
 
-    public MoveToTarget(Vector3 target, IMovable movable)
+    public MoveToTarget(Transform target, IMovable movable)
     {
         _target = target;
         _movable = movable;
@@ -21,9 +22,10 @@ public class MoveToTarget : Mover
         if (_isMoving == false)
             return;
 
-        Vector3 directionToTarget = _target - _movable.Transform.position;
-
+        Vector3 directionToTarget = _target.position - _movable.Transform.position;
         Move(_movable.Transform, directionToTarget, _movable.Speed);
-        ProcessRotate(_movable.Transform, directionToTarget, _movable.SpeedRotion);
+
+        if (directionToTarget.magnitude > MinDistance)
+            ProcessRotate(_movable.Transform, directionToTarget, _movable.SpeedRotion);
     }
 }

@@ -160,7 +160,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e09353a7bf437a43b46536f8eba689f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyMoveType: 0
-  _enemyPrefab: {fileID: 1906927171641894039, guid: 856b34856e03812489fdfba3d71f51d7,
+  _enemyDefaultState: 0
+  _enemyReactionToPlayer: 0
+  _enemyPrefab: {fileID: 2362858577489333466, guid: 856b34856e03812489fdfba3d71f51d7,
     type: 3}
   _targetPoints: []
+  _player: {fileID: 0}

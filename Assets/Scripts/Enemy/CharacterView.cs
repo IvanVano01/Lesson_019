@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyView : MonoBehaviour
+public class CharacterView : MonoBehaviour
 {
     [SerializeField] private ParticleSystem _particleEffect;
 

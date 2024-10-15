@@ -8,11 +8,11 @@ public class MoveRandomDirect : Mover
     private float _maxdistanceFromBorder = 15f;
 
     private IMovable _movable;
-    private Vector3 _targetBound;
+    private Transform _targetBound;
 
     private Vector3 _direction;
 
-    public MoveRandomDirect(IMovable movable, Vector3 targetBound)
+    public MoveRandomDirect(IMovable movable, Transform targetBound)
     {
         _movable = movable;
         _targetBound = targetBound;
@@ -51,7 +51,7 @@ public class MoveRandomDirect : Mover
         Vector3 randomDirection = new Vector3(axisX, 0, axisZ);
 
         if (IsOutBounds())
-            return DirectionToTargetBound(_targetBound);
+            return DirectionToTargetBound(_targetBound.position);
 
         return randomDirection;
     }
@@ -63,7 +63,7 @@ public class MoveRandomDirect : Mover
 
     private bool IsOutBounds()
     {
-        Vector3 vectorlength = _targetBound - _movable.Transform.position;
+        Vector3 vectorlength = _targetBound.position - _movable.Transform.position;
 
         if (vectorlength.magnitude > _maxdistanceFromBorder)
             return true;

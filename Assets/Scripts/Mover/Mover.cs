@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public abstract class Mover
-{    
+{
     protected bool _isMoving;
 
     public abstract void StartMove();
@@ -19,6 +19,9 @@ public abstract class Mover
     public void ProcessRotate(Transform transform, Vector3 direction, float speedRotation)
     {
         Quaternion lookrotation = Quaternion.LookRotation(direction.normalized);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, lookrotation, speedRotation * Time.deltaTime);
+
+        Quaternion lookrotationFreezeAxisXZ = Quaternion.Euler(0, lookrotation.eulerAngles.y, 0);
+
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, lookrotationFreezeAxisXZ, speedRotation * Time.deltaTime);
     }
 }
