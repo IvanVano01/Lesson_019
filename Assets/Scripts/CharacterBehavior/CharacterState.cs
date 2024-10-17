@@ -1,18 +1,19 @@
 public abstract class CharacterState : IBehavior
 {
+    protected const float MinDistance = 0.05f;
+
+    protected EnemyMover _mover;
+
     protected bool _isRunningState;
 
-    protected Mover _mover;
-
-    protected CharacterState(Mover mover)
+    protected CharacterState(EnemyMover mover)
     {
         _mover = mover;
     }
 
     public virtual void EnterState()
     {
-        _isRunningState = true;
-        SetMover(_mover);
+        _isRunningState = true;        
     }
 
     public virtual void ExitState()
@@ -23,14 +24,6 @@ public abstract class CharacterState : IBehavior
     public virtual void Update()
     {
         if (_isRunningState == false)
-            return;
-        _mover.Update();
-    }
-
-    public virtual void SetMover(Mover mover)
-    {
-        _mover?.StopMove();
-        _mover = mover;
-        _mover.StartMove();
-    }
+            return;        
+    }    
 }

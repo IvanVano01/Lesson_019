@@ -38,20 +38,20 @@ public class EnemySpawner : MonoBehaviour
         {
             case EnemyDefaultState.EnemyNoMove:
                 {
-                    Mover mover = new NoMove();
+                    EnemyMover mover = new EnemyMover(enemyPrefab.Transform, enemyPrefab.Speed, enemyPrefab.SpeedRotion);
                     return new NoMoveState(mover);
                 }
 
             case EnemyDefaultState.EnemyMovePointByPoint:
                 {
-                    Mover mover = new MovePointByPoint(enemyPrefab, targetPoints);
-                    return new MovePointByPointState(mover);
+                    EnemyMover mover = new EnemyMover(enemyPrefab.Transform,enemyPrefab.Speed,enemyPrefab.SpeedRotion);
+                    return new MovePointByPointState(mover,targetPoints,enemyPrefab);
                 }
 
             case EnemyDefaultState.EnemyMoveRandomDirect:
                 {
-                    Mover mover = new MoveRandomDirect(enemyPrefab, target);
-                    return new MoveRandomDirectState(mover);
+                    EnemyMover mover = new EnemyMover(enemyPrefab.Transform, enemyPrefab.Speed, enemyPrefab.SpeedRotion);
+                    return new MoveRandomDirectState(mover, target, enemyPrefab);
                 }
 
             default:
@@ -66,21 +66,20 @@ public class EnemySpawner : MonoBehaviour
         {
             case EnemyReactionToPlayer.EnemyFollowPlayer:
                 {
-                    Mover mover = new MoveToTarget(playerTransform, enemyPrefab);
-                    return new FollowTargetState(mover);
+                    EnemyMover mover = new EnemyMover(enemyPrefab.Transform, enemyPrefab.Speed, enemyPrefab.SpeedRotion);
+                    return new FollowTargetState(mover, playerTransform, enemyPrefab);
                 }
 
             case EnemyReactionToPlayer.EnemyRunAway:
                 {
-                    Mover mover = new MoveRunAway(enemyPrefab, playerTransform.position);
-                    return new RunAwayState(mover);
+                    EnemyMover mover = new EnemyMover(enemyPrefab.Transform, enemyPrefab.Speed, enemyPrefab.SpeedRotion);
+                    return new RunAwayState(mover, playerTransform.transform, enemyPrefab);
                 }
 
             case EnemyReactionToPlayer.EnemyScaredAndDie:
-                {
-                    Mover mover = new NoMove();
+                {                   
                     CharacterView characterView = _enemyPrefab.View;
-                    return new ScaredAndDieState(mover, enemyPrefab, characterView);
+                    return new ScaredAndDieState(null, enemyPrefab, characterView);
                 }
 
             default:

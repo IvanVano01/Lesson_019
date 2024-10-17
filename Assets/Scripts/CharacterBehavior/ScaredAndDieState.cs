@@ -5,7 +5,7 @@ public class ScaredAndDieState : CharacterState
     private IMovable _movable;
     private CharacterView _view;
 
-    public ScaredAndDieState(Mover mover, IMovable movable, CharacterView view) : base(mover)
+    public ScaredAndDieState(EnemyMover mover, IMovable movable, CharacterView view) : base(mover)
     {
         _movable = movable;
         _view = view;
